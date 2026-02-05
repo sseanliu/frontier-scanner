@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "monitor": "tsx scripts/monitor-cli.ts",
+    "monitor:daemon": "tsx scripts/monitor-cli.ts --daemon",
+    "monitor:config": "tsx scripts/monitor-cli.ts --config"
   },
   "dependencies": {
     "better-sqlite3": "^12.6.2",
@@ -25,6 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "tailwindcss": "^4",
+    "tsx": "^4.21.0",
     "typescript": "^5"
   },
   "pnpm": {
