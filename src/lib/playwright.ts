@@ -10,8 +10,9 @@ if (!fs.existsSync(DATA_DIR)) {
   fs.mkdirSync(DATA_DIR, { recursive: true });
 }
 
-const FRONTIER_LOGIN_URL = "https://www.flyfrontier.com/myfrontier/login";
-const FRONTIER_ACCOUNT_URL = "https://www.flyfrontier.com/myfrontier/my-account";
+// Updated URLs - Frontier changed their site structure
+const FRONTIER_LOGIN_URL = "https://www.flyfrontier.com/";
+const FRONTIER_ACCOUNT_URL = "https://booking.flyfrontier.com/FrontierMiles/Profile";
 
 // Store browser instance for login flow
 let loginBrowser: Browser | null = null;
@@ -164,10 +165,13 @@ export async function checkLoginStatus(): Promise<{
     const url = loginPage.url();
 
     // Check if we're on the account page or have been redirected from login
+    // Updated patterns for new Frontier site structure
     const isLoggedIn =
+      url.includes("/FrontierMiles/Profile") ||
       url.includes("/myfrontier/my-account") ||
       url.includes("/myfrontier/dashboard") ||
-      (url.includes("flyfrontier.com") && !url.includes("/login"));
+      url.includes("booking.flyfrontier.com") ||
+      (url.includes("flyfrontier.com") && !url.includes("/login") && !url.includes("flyfrontier.com/"));
 
     // Also check for logged-in indicators on the page
     if (isLoggedIn) {
